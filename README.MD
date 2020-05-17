@@ -4,6 +4,7 @@ The script here is designed to spin up an example AWS Elemental MediaLive and Me
 
 ## Requirements
 
+- AWS CLI with credentials configured
 - Python 3.8+
 - An RTMP streaming app for your phone (e.g. Zixi OnAir)
 
