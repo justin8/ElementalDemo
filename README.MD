@@ -1,6 +1,8 @@
 # AWS Elemental Demo
 
-The script here is designed to spin up an example AWS Elemental MediaLive and MediaPackage pipeline to publish a live video stream out to a HLS endpoint in a fully serverless manner.
+The script here is designed to spin up an example AWS Elemental MediaLive and MediaPackage pipeline to publish a live video stream out to a HLS endpoint in a fully serverless manner. Below is a diagram of what is created by this script. The AWS Elemental services let you get something running with very little in the way off resources that you have to manage. Further down you can see an example architecture of a more production-ready usage of these services.
+
+![Demo Diagram](demo-diagram.png)
 
 ## Requirements
 
@@ -38,8 +40,8 @@ MediaLive Input Paramaters
 	 Url: rtmp://13.237.216.152:1935/live
 ```
 
-## Diagram
+## Production Workloads
 
-This is a diagram of what is created by this script. The AWS Elemental services let you get something running with very little resources that you have to manage. In a production workload you would enable dual-pipelines (think multi-AZ for video streams), and serve customers via CloudFront. Since CloudFront takes ~5 minutes to come up on creation it's left out of this demo pipeline.
+Here is a more production-ready diagram to show what this would look like. In a production workload you would enable dual-pipelines (think multi-AZ for video streams), and serve customers via CloudFront. Since CloudFront takes ~5 minutes to come up on creation it's left out of this demo pipeline. The dual-pipelines here mean that you can withstand a full AZ failure and continue to run. If you have redundant internet links and recording equipment on-site you can also withstand one of those failing as there are multiple ingestion endpoints created in the MediaLive channel for you to send the video feed to.
 
-![Demo Diagram](demo-diagram.png)
+![Production diagram](production-diagram.png)
