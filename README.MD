@@ -17,7 +17,6 @@ The script here is designed to spin up an example AWS Elemental MediaLive and Me
 4. Input the RTMP stream values in to a streaming app on your phone or other device. Typically you will put the `/live` in the stream field, and the IP address in the server field of your application
 5. When you're finished, run `./DemoPipeline.py --cleanup` to delete all of the resources
 
-
 ## Example
 
 ```shell
@@ -38,3 +37,9 @@ MediaLive Input Paramaters
 	 Port: 1935
 	 Url: rtmp://13.237.216.152:1935/live
 ```
+
+## Diagram
+
+This is a diagram of what is created by this script. The AWS Elemental services let you get something running with very little resources that you have to manage. In a production workload you would enable dual-pipelines (think multi-AZ for video streams), and serve customers via CloudFront. Since CloudFront takes ~5 minutes to come up on creation it's left out of this demo pipeline.
+
+![Demo Diagram](demo-diagram.png)
