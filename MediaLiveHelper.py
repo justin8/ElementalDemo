@@ -19,6 +19,7 @@ import botocore
 class MediaLiveHelper:
     def __init__(self, security_cidr, media_package_channel_id, resource_prefix, tags):
         self.client = boto3.client('medialive')
+        self.channel_id = None
         self.security_cidr = security_cidr
         self.resource_prefix = resource_prefix
         self.media_package_channel_id = media_package_channel_id
@@ -355,16 +356,17 @@ class MediaLiveHelper:
                 print(f"Unknown condition STATE[{state}]")
 
     def get_channel_id(self):
-        channel_id = None
+        if self.channel_id:
+            return self.channel_id
         try:
             response = self.client.list_channels()
         except botocore.exceptions.ClientError as e:
             print(e.response['Error']['Code'])
         for channel in self.filter_by_tags(response['Channels']):
-            channel_id = channel['Id']
-        if not channel_id:
+            self.channel_id = channel['Id']
+        if not self.channel_id:
             raise RuntimeError("Unable to determine specified channel ID")
-        return channel_id
+        return self.channel_id
 
     def cleanup(self):
         with suppress(Exception):
